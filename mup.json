@@ -1,0 +1,20 @@
+{
+  "servers": [
+    {
+      "host": "box.octonary.com",
+      "username": "hwillson",
+      "pem": "~/.ssh/id_rsa",
+      "env": {}
+    }
+  ],
+  "setupMongo": true,
+  "appName": "box",
+  "app": "/Users/hwillson/Documents/git/box",
+  "env": {
+    "ROOT_URL": "http://box.octonary.com",
+    "PORT": 8000,
+    "METEOR_ENV": "production"
+  },
+  "deployCheckWaitTime": 15,
+  "enableUploadProgressBar": true
+}
