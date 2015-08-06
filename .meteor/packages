@@ -9,3 +9,8 @@ kadira:flow-router
 kadira:blaze-layout
 ongoworks:security
 mquandalle:stylus
+aldeed:simple-schema
+aldeed:collection2
+matb33:collection-hooks
+simple:rest
+momentjs:moment
