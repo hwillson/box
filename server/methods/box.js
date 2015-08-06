@@ -20,6 +20,7 @@ Meteor.methods({
       boxId = BX.Collections.Box.insert(box);
 
       boxItems.forEach(function (boxItem) {
+        boxItem.boxId = boxId;
         BX.Collections.BoxItem.insert(boxItem);
       });
 
