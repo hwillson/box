@@ -28,6 +28,22 @@ Meteor.methods({
 
     return boxId;
 
+  },
+
+  addToBox: function (boxItem) {
+    var boxItemId;
+    check(boxItem, Object);
+
+    JsonRoutes.setResponseHeaders({
+      'Cache-Control': 'no-store',
+      'Pragma': 'no-cache',
+      'Access-Control-Allow-Origin': 'http://thefeed.octonary.com',
+      'Access-Control-Allow-Methods': 'POST',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+    });
+
+    boxItemId = BX.Collection.BoxItem.insert(boxItem);
+    return boxItemId;
   }
 
 });

@@ -15,3 +15,6 @@ matb33:collection-hooks
 simple:rest
 momentjs:moment
 reactive-dict
+browser-policy
+simple:json-routes
+pfafman:font-awesome-4

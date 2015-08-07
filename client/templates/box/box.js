@@ -38,3 +38,12 @@ Template.box.helpers({
   }
 
 });
+
+Template.box.events({
+
+  'click .remove-box-item': function (e) {
+    e.preventDefault();
+    BX.Collection.BoxItem.remove({ _id: this._id });
+  }
+
+})

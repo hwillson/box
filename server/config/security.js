@@ -1,0 +1,1 @@
+BX.Collection.BoxItem.permit(['remove']).apply();
