@@ -2,7 +2,7 @@ Meteor.methods({
 
   createNewBox: function (boxData) {
 
-    var boxId, startDate, box, boxItems, customerId;
+    var boxId, startDate, box, boxItems, customerId, response;
     check(boxData, Object);
 
     boxItems = boxData.boxItems;
@@ -15,13 +15,13 @@ Meteor.methods({
         customerId: customerId,
         startDate: startDate.toDate(),
         renewalDate: startDate.add(1, 'months').toDate(),
-        statusId: BX.Models.BoxStatus.active
+        statusId: BX.Model.BoxStatus.active
       };
-      boxId = BX.Collections.Box.insert(box);
+      boxId = BX.Collection.Box.insert(box);
 
       boxItems.forEach(function (boxItem) {
         boxItem.boxId = boxId;
-        BX.Collections.BoxItem.insert(boxItem);
+        BX.Collection.BoxItem.insert(boxItem);
       });
 
     }

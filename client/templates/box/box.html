@@ -1,3 +1,41 @@
 <template name="box">
-  Box contents ...
+
+  <div class="box">
+    <h1>My Box</h1>
+    {{#if Template.subscriptionsReady}}
+      {{#if boxItemsExist}}
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each boxItems}}
+              <tr>
+                <td>
+                  <img src="{{productImage}}">
+                  <a href="{{productUrl}}">{{productName}}</a>
+                  ({{variationDetails}})
+                </td>
+                <td>
+                  {{quantity}}
+                </td>
+                <td>
+                  ${{totalPrice}}
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p>Nothing in your box.</p>
+      {{/if}}
+    {{else}}
+      Loading ...
+    {{/if}}
+  </div>
+
 </template>
