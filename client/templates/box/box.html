@@ -1,12 +1,13 @@
 <template name="box">
 
   <div class="box">
-    <h1>My Box</h1>
+    <h1>Monthly Box</h1>
     {{#if Template.subscriptionsReady}}
       {{#if boxItemsExist}}
         <table>
           <thead>
             <tr>
+              <th></th>
               <th></th>
               <th>Item</th>
               <th>Quantity</th>
@@ -18,18 +19,20 @@
               <tr>
                 <td>
                   <a href="#" class="remove-box-item">
-                    <i class="fa fa-minus-circle"></i>
+                    <i class="fa fa-remove"></i>
                   </a>
                 </td>
-                <td>
+                <td class="box-item-image">
                   <img src="{{productImage}}">
-                  <a href="{{productUrl}}">{{productName}}</a>
-                  ({{variationDetails}})
                 </td>
                 <td>
+                  <a href="{{productUrl}}">{{productName}}</a>
+                  <p>({{variationDetails}})</p>
+                </td>
+                <td class="box-item-quantity">
                   {{quantity}}
                 </td>
-                <td>
+                <td class="box-item-price">
                   ${{totalPrice}}
                 </td>
               </tr>
