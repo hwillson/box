@@ -15,7 +15,7 @@ Meteor.methods({
         customerId: customerId,
         startDate: startDate.toDate(),
         renewalDate: startDate.add(1, 'months').toDate(),
-        statusId: BX.Model.BoxStatus.active
+        statusId: BX.Model.BoxStatus.active.id
       };
       boxId = BX.Collection.Box.insert(box);
 

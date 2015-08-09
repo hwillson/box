@@ -9,12 +9,19 @@ a
 a:hover, a:focus
   color #18242f
 
+p
+  margin 5px
+
 .box
+  padding 0 10px
+  .container
+    margin 0
+    width 100%
   h1
     color $colorTitle
     font-weight 700
     font-size 1.125em
-    margin-bottom 25px
+    margin-bottom 20px
     margin-top 18px
     border-bottom 1px solid #D4E0EC
     padding-bottom 5px
@@ -24,6 +31,7 @@ a:hover, a:focus
   table
     border 1px solid #D4E0EC
     border-collapse separate
+    width 100%
     th
       background-color #F9FAFC
       font-weight 100
@@ -46,3 +54,37 @@ a:hover, a:focus
       text-align right
     p
       margin 0
+  .box-details
+    margin-bottom 20px
+    .box-status
+      color #FFF
+      border-radius 2px
+      padding 1px 7px 2px 7px
+      text-transform uppercase
+      font-weight bold
+      margin-left 5px
+    .box-active
+      background-color #5cb85c
+    .box-controls
+      margin-left 5px
+  .box-message
+    border 1px solid #D4E0EC
+    background-color #F1F2F4
+    padding 10px 20px 5px 20px
+    border-radius 5px
+    ul
+      margin 10px 0
+      list-style disc inside
+      li
+        margin 0
+
+.sweet-alert
+  top 20%
+  h2
+    margin 15px 0
+  button
+    line-height inherit
+    height inherit
+    margin 10px 5px
+  .sa-icon
+    margin 10px auto
