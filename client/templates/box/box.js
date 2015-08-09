@@ -23,6 +23,22 @@ Template.box.onCreated(function () {
 
 });
 
+Template.box.onRendered(function () {
+
+  this.autorun(function () {
+    if (Template.instance().subscriptionsReady()) {
+      var box = BX.Collection.Box.findOne();
+      if (box && (box.statusId === BX.Model.BoxStatus.paused.id)) {
+        Meteor.defer(function () {
+          $('.box-pause').hide();
+          $('.box-resume').show();
+        });
+      }
+    }
+  });
+
+})
+
 Template.box.helpers({
 
   box: function () {
@@ -34,7 +50,11 @@ Template.box.helpers({
   },
 
   boxItemsExist: function () {
-    return BX.Collection.BoxItem.find().count();
+    var box = BX.Collection.Box.findOne(), boxItemsCount = 0;
+    if (box) {
+      boxItemsCount = BX.Collection.BoxItem.find().count();
+    }
+    return boxItemsCount;
   },
 
   boxItems: function () {
@@ -72,6 +92,44 @@ Template.box.events({
       );
       $('.box-pause').hide();
       $('.box-resume').show();
+    }, this));
+  },
+
+  'click .box-resume': function (e) {
+    e.preventDefault();
+    var boxId = this._id;
+    BX.Collection.Box.update(
+      { _id: boxId },
+      {
+        $set: {
+          statusId: BX.Model.BoxStatus.active.id
+        }
+      }
+    );
+    $('.box-resume').hide();
+    $('.box-pause').show();
+  },
+
+  'click .box-cancel': function (e) {
+    e.preventDefault();
+    sweetAlert({
+      title: 'Cancel Your Monthly Box?',
+      text: 'Are you sure you want to cancel your monthly box? Cancelling will completely remove your box from your account (all box selections will be removed). You will no longer receive monthly shipments.',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Definitely',
+      animation: false
+    }, _.bind(function () {
+      var boxId = this._id;
+      BX.Collection.Box.update(
+        { _id: boxId },
+        {
+          $set: {
+            statusId: BX.Model.BoxStatus.cancelled.id
+          }
+        }
+      );
     }, this));
   }
 

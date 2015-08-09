@@ -4,80 +4,85 @@
     <h1>Monthly Box</h1>
     {{#if Template.subscriptionsReady}}
 
-      {{#with box}}
-        <div class="box-details">
-          <p>
-            Monthly Box status:
-            <span class="box-status box-{{statusId}}">{{boxStatusLabel}}</span>
-            <span class="box-controls">
-              (<a href="#" class="box-pause">Pause</a>
-              <a href="#" class="u-hide box-resume">Resume</a>
-              | <a href="#">Cancel</a>)
-            </span>
-          </p>
-          <p>
-            Your next box ships on: <strong>2015-08-08 8:21 PM MST</strong>
-          </p>
-        </div>
-      {{/with}}
+      {{#if box}}
 
-      <div class="container">
-        <div class="row">
-          {{#if boxItemsExist}}
+        {{#with box}}
+          <div class="box-details">
+            <p>
+              Monthly Box status:
+              <span class="box-status box-{{statusId}}">{{boxStatusLabel}}</span>
+              <span class="box-controls">
+                (<a href="#" class="box-pause">Pause</a><a href="#"
+                  class="u-hide box-resume">Resume</a>
+                | <a href="#" class="box-cancel">Cancel</a>)
+              </span>
+            </p>
+            <p>
+              Your next box ships on: <strong>2015-08-08 8:21 PM MST</strong>
+            </p>
+          </div>
+        {{/with}}
 
-            <div class="eight columns">
-              <table>
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#each boxItems}}
+        <div class="container">
+          <div class="row">
+            {{#if boxItemsExist}}
+
+              <div class="eight columns">
+                <table>
+                  <thead>
                     <tr>
-                      <td>
-                        <a href="#" class="remove-box-item">
-                          <i class="fa fa-remove"></i>
-                        </a>
-                      </td>
-                      <td class="box-item-image">
-                        <img src="{{productImage}}">
-                      </td>
-                      <td>
-                        <a href="{{productUrl}}">{{productName}}</a>
-                        <p>({{variationDetails}})</p>
-                      </td>
-                      <td class="box-item-quantity">
-                        {{quantity}}
-                      </td>
-                      <td class="box-item-price">
-                        ${{totalPrice}}
-                      </td>
+                      <th></th>
+                      <th></th>
+                      <th>Item</th>
+                      <th>Quantity</th>
+                      <th>Total Price</th>
                     </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-            </div>
-            <div class="four columns">
-              <div class="box-message">
-                Your next box will be packaged, billed and prepared for shipping at <strong>2015-08-08 8:21 PM MST</strong>. To make changes to your monthly box at any point you can:
-                <ul>
-                  <li>Adjust box item flavors and quantities;</li>
-                  <li>Remove items from your box;</li>
-                  <li>Browse the site and add new items to your box by clicking on an items "Add to Monthly Box" button.</li>
-                </ul>
+                  </thead>
+                  <tbody>
+                    {{#each boxItems}}
+                      <tr>
+                        <td>
+                          <a href="#" class="remove-box-item">
+                            <i class="fa fa-remove"></i>
+                          </a>
+                        </td>
+                        <td class="box-item-image">
+                          <img src="{{productImage}}">
+                        </td>
+                        <td>
+                          <a href="{{productUrl}}">{{productName}}</a>
+                          <p>({{variationDetails}})</p>
+                        </td>
+                        <td class="box-item-quantity">
+                          {{quantity}}
+                        </td>
+                        <td class="box-item-price">
+                          ${{totalPrice}}
+                        </td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
               </div>
-            </div>
+              <div class="four columns">
+                <div class="box-message">
+                  Your next box will be packaged, billed and prepared for shipping at <strong>2015-08-08 8:21 PM MST</strong>. To make changes to your monthly box at any point you can:
+                  <ul>
+                    <li>Adjust box item flavors and quantities;</li>
+                    <li>Remove items from your box;</li>
+                    <li>Browse the site and add new items to your box by clicking on an items "Add to Monthly Box" button.</li>
+                  </ul>
+                </div>
+              </div>
 
-          {{else}}
-            <p>Nothing in your box.</p>
-          {{/if}}
+            {{else}}
+              <p>Nothing in your box.</p>
+            {{/if}}
+          </div>
         </div>
-      </div>
+      {{else}}
+        You don't have a monthly box.
+      {{/if}}
 
     {{else}}
       Loading ...
