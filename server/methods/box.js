@@ -2,7 +2,7 @@ Meteor.methods({
 
   createNewBox: function (boxData) {
 
-    var boxId, startDate, box, boxItems, customerId, response;
+    var boxId, startDate, box, boxItems, customerId, order;
     check(boxData, Object);
 
     boxItems = boxData.boxItems;
@@ -12,7 +12,11 @@ Meteor.methods({
 
       startDate = moment();
       box = {
+        referenceId: incrementCounter('box_counter', 'boxReferenceId'),
         customerId: customerId,
+        customerFirstName: boxData.customer.firstName,
+        customerLastName: boxData.customer.lastName,
+        customerEmail: boxData.customer.email,
         startDate: startDate.toDate(),
         renewalDate: startDate.add(1, 'months').toDate(),
         statusId: BX.Model.BoxStatus.active.id
@@ -23,6 +27,10 @@ Meteor.methods({
         boxItem.boxId = boxId;
         BX.Collection.BoxItem.insert(boxItem);
       });
+
+      order = boxData.order;
+      order.boxId = boxId;
+      BX.Collection.BoxOrder.insert(order);
 
     }
 

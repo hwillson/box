@@ -18,5 +18,8 @@ reactive-dict
 browser-policy
 simple:json-routes
 pfafman:font-awesome-4
-skeleton:skeleton
 kevohagan:sweetalert
+aslagle:reactive-table
+twbs:bootstrap
+osv:mongo-counter
+dburles:collection-helpers

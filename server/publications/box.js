@@ -7,3 +7,14 @@ Meteor.publish('singleBox', function (boxId) {
     }
   });
 });
+
+Meteor.publish('boxAnyStatus', function (boxId) {
+  check(boxId, String);
+  return BX.Collection.Box.find({
+    _id: boxId
+  });
+});
+
+Meteor.publish('allBoxes', function () {
+  return BX.Collection.Box.find();
+});

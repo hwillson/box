@@ -1,0 +1,10 @@
+<template name="adminBoxes">
+  <div class="boxes">
+    <h1>Customer Boxes</h1>
+    {{#if Template.subscriptionsReady}}
+      {{> reactiveTable settings=settings}}
+    {{else}}
+      Loading ...
+    {{/if}}
+  </div>
+</template>

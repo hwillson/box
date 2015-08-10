@@ -1,0 +1,13 @@
+{
+  "transport": "scp",
+  "uploadOnSave": true,
+  "hostname": "thefeed.octonary.com",
+  "target": "/var/www/remote/box",
+  "ignore": [
+    ".git/**",
+    ".gitignore",
+    ".meteor/**"
+  ],
+  "username": "hwillson",
+  "keyfile": "/Users/hwillson/.ssh/id_rsa"
+}

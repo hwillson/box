@@ -1,0 +1,133 @@
+<template name="adminBox">
+  <div class="a-box">
+
+    <p>
+      <a href="#" class="goto-boxes">&laquo; Back to Boxes</a>
+    </p>
+
+    <h1>Customer Box</h1>
+    {{#if Template.subscriptionsReady}}
+
+      {{#if box}}
+
+        {{#with box}}
+
+          <h2>Details</h2>
+          <div class="row">
+            <div class="col-md-4">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th>Customer Name</th>
+                    <td>{{customerName}}</td>
+                  </tr>
+                  <tr>
+                    <th>Customer Email</th>
+                    <td><a href="mailto:{{customerEmail}}">{{customerEmail}}</a></td>
+                  </tr>
+                  <tr>
+                    <th>Start Date</th>
+                    <td>2015-08-08 8:21 PM MST</td>
+                  </tr>
+                  <tr>
+                    <th>Renewal Date</th>
+                    <td>2015-08-08 8:21 PM MST</td>
+                  </tr>
+                  <tr>
+                    <th>Box Status</th>
+                    <td>
+                      <span class="box-status box-{{statusId}}">{{boxStatusLabel}}</span>
+                      <span class="box-controls">
+                        (<a href="#" class="box-pause">Pause</a><a href="#"
+                          class="u-hide box-resume">Resume</a>
+                        | <a href="#" class="box-cancel">Cancel</a>)
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <h2>Order History</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Order Type</th>
+                    <th>Order Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each orderHistory}}
+                    <tr>
+                      <td><a href="#">{{orderId}}</a></td>
+                      <td>{{orderType}}</td>
+                      <td>{{formatDate orderDate}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        {{/with}}
+
+        <h2>Items</h2>
+        <div class="row">
+          {{#if boxItemsExist}}
+
+            <div class="col-md-6">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each boxItems}}
+                    <tr>
+                      <td class="box-item-image">
+                        <img src="{{productImage}}">
+                      </td>
+                      <td>
+                        <a href="{{productUrl}}">{{productName}}</a>
+                        {{#if variationDetails}}
+                          <p>({{variationDetails}})</p>
+                        {{/if}}
+                      </td>
+                      <td class="box-item-quantity">
+                        {{quantity}}
+                      </td>
+                      <td class="box-item-price">
+                        ${{totalPrice}}
+                      </td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+
+          {{else}}
+            <p>Nothing in your box.</p>
+          {{/if}}
+        </div>
+
+      {{else}}
+        No box found.
+      {{/if}}
+
+    {{else}}
+      Loading ...
+    {{/if}}
+
+  </div>
+
+
+
+</template>
