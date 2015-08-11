@@ -1,2 +1,2 @@
-BX.Collection.Box.permit(['update']).apply();
-BX.Collection.BoxItem.permit(['remove']).apply();
+BX.Collection.Boxes.permit(['update']).apply();
+BX.Collection.BoxItems.permit(['remove']).apply();

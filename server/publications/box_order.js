@@ -1,6 +1,6 @@
 Meteor.publish('boxOrders', function (boxId) {
   check(boxId, String);
-  return BX.Collection.BoxOrder.find({
+  return BX.Collection.BoxOrders.find({
     boxId: boxId
   });
 });

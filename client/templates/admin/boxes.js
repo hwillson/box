@@ -6,7 +6,7 @@ Template.adminBoxes.helpers({
 
   settings: function () {
     return {
-      collection: BX.Collection.Box.find(),
+      collection: BX.Collection.Boxes.find(),
       fields: [
         {
           key: 'referenceId',
@@ -35,14 +35,14 @@ Template.adminBoxes.helpers({
           key: 'startDate',
           label: 'Start Date',
           fn: function (value, object) {
-            return BX.Utility.Date.format(value);
+            return BX.Utility.Date.formatDate(value);
           }
         },
         {
           key: 'renewalDate',
           label: 'Next Renewal Date',
           fn: function (value, object) {
-            return BX.Utility.Date.format(value);
+            return BX.Utility.Date.formatDate(value);
           }
         }
       ]

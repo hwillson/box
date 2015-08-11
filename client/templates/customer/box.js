@@ -1,7 +1,7 @@
 Template.box.onCreated(function () {
 
   var boxId = BX.Session.get('boxId');
-  this.subscribe('singleBox', boxId);
+  this.subscribe('boxNotCancelled', boxId);
   this.subscribe('boxItemsForBox', boxId);
 
   // If called from an iframe, pass the content height back to the iframe so
@@ -27,13 +27,26 @@ Template.box.onRendered(function () {
 
   this.autorun(function () {
     if (Template.instance().subscriptionsReady()) {
-      var box = BX.Collection.Box.findOne();
+
+      var box = BX.Collection.Boxes.findOne();
       if (box && (box.statusId === BX.Model.BoxStatus.paused.id)) {
         Meteor.defer(function () {
           $('.box-pause').hide();
           $('.box-resume').show();
         });
       }
+
+      Meteor.defer(function () {
+        $('.box-renewal-date').datepicker({
+          format: 'yyyy-mm-dd',
+          startDate: moment().add(1, 'days').format('YYYY-MM-DD')
+        });
+      });
+
+      Meteor.defer(function () {
+        $('.box-renewal-freq').val(box.renewalFrequencyId);
+      });
+
     }
   });
 
@@ -42,7 +55,12 @@ Template.box.onRendered(function () {
 Template.box.helpers({
 
   box: function () {
-    return BX.Collection.Box.findOne();
+    return BX.Collection.Boxes.findOne();
+  },
+
+  boxRenewalDate: function () {
+    var box = BX.Collection.Boxes.findOne();
+    return BX.Utility.Date.formatDate(box.renewalDate);
   },
 
   boxStatusLabel: function () {
@@ -50,15 +68,15 @@ Template.box.helpers({
   },
 
   boxItemsExist: function () {
-    var box = BX.Collection.Box.findOne(), boxItemsCount = 0;
+    var box = BX.Collection.Boxes.findOne(), boxItemsCount = 0;
     if (box) {
-      boxItemsCount = BX.Collection.BoxItem.find().count();
+      boxItemsCount = BX.Collection.BoxItems.find().count();
     }
     return boxItemsCount;
   },
 
   boxItems: function () {
-    return BX.Collection.BoxItem.find();
+    return BX.Collection.BoxItems.find();
   }
 
 });
@@ -67,7 +85,7 @@ Template.box.events({
 
   'click .remove-box-item': function (e) {
     e.preventDefault();
-    BX.Collection.BoxItem.remove({ _id: this._id });
+    this.remove();
   },
 
   'click .box-pause': function (e) {
@@ -81,31 +99,14 @@ Template.box.events({
       confirmButtonText: 'Definitely',
       animation: false
     }, _.bind(function () {
-      var boxId = this._id;
-      BX.Collection.Box.update(
-        { _id: boxId },
-        {
-          $set: {
-            statusId: BX.Model.BoxStatus.paused.id
-          }
-        }
-      );
+      this.updateBoxStatus(BX.Model.BoxStatus.paused.id);
       $('.box-pause').hide();
       $('.box-resume').show();
     }, this));
   },
 
   'click .box-resume': function (e) {
-    e.preventDefault();
-    var boxId = this._id;
-    BX.Collection.Box.update(
-      { _id: boxId },
-      {
-        $set: {
-          statusId: BX.Model.BoxStatus.active.id
-        }
-      }
-    );
+    this.updateBoxStatus(BX.Model.BoxStatus.active.id);
     $('.box-resume').hide();
     $('.box-pause').show();
   },
@@ -121,16 +122,18 @@ Template.box.events({
       confirmButtonText: 'Definitely',
       animation: false
     }, _.bind(function () {
-      var boxId = this._id;
-      BX.Collection.Box.update(
-        { _id: boxId },
-        {
-          $set: {
-            statusId: BX.Model.BoxStatus.cancelled.id
-          }
-        }
-      );
+      this.updateBoxStatus(BX.Model.BoxStatus.cancelled.id);
     }, this));
+  },
+
+  'change .box-renewal-date': _.debounce(function (e) {
+    var selectedDate = $(e.currentTarget).val();
+    this.updateRenewalDate(selectedDate);
+  }, 100),
+
+  'change .box-renewal-freq': function (e) {
+    var frequencyId = $(e.currentTarget).find(':selected').val();
+    this.updateRenewalFrequency(frequencyId);
   }
 
-})
+});

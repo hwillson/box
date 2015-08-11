@@ -2,7 +2,8 @@ Meteor.methods({
 
   createNewBox: function (boxData) {
 
-    var boxId, startDate, box, boxItems, customerId, order;
+    var boxId, startDate, renewalFrequencyId, renewalDate, box, boxItems,
+        customerId, order;
     check(boxData, Object);
 
     boxItems = boxData.boxItems;
@@ -11,6 +12,14 @@ Meteor.methods({
       customerId = Meteor.call('createCustomer', boxData.customer);
 
       startDate = moment();
+      if (boxData.box && boxData.box.renewalFrequencyId) {
+        renewalFrequencyId = boxData.box.renewalFrequencyId;
+      } else {
+        renewalFrequencyId = BX.Model.BoxRenewalFrequency.m1.id;
+      }
+      renewalDate =
+        BX.Model.BoxRenewalFrequency.renewalDateForFrequency(renewalFrequencyId);
+
       box = {
         referenceId: incrementCounter('box_counter', 'boxReferenceId'),
         customerId: customerId,
@@ -18,19 +27,20 @@ Meteor.methods({
         customerLastName: boxData.customer.lastName,
         customerEmail: boxData.customer.email,
         startDate: startDate.toDate(),
-        renewalDate: startDate.add(1, 'months').toDate(),
+        renewalFrequencyId: renewalFrequencyId,
+        renewalDate: renewalDate.toDate(),
         statusId: BX.Model.BoxStatus.active.id
       };
-      boxId = BX.Collection.Box.insert(box);
+      boxId = BX.Collection.Boxes.insert(box);
 
       boxItems.forEach(function (boxItem) {
         boxItem.boxId = boxId;
-        BX.Collection.BoxItem.insert(boxItem);
+        BX.Collection.BoxItems.insert(boxItem);
       });
 
       order = boxData.order;
       order.boxId = boxId;
-      BX.Collection.BoxOrder.insert(order);
+      BX.Collection.BoxOrders.insert(order);
 
     }
 
@@ -50,7 +60,7 @@ Meteor.methods({
       'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
     });
 
-    boxItemId = BX.Collection.BoxItem.insert(boxItem);
+    boxItemId = BX.Collection.BoxItems.insert(boxItem);
     return boxItemId;
   }
 

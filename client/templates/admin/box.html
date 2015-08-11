@@ -15,43 +15,65 @@
           <h2>Details</h2>
           <div class="row">
             <div class="col-md-4">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <th>Customer Name</th>
-                    <td>{{customerName}}</td>
-                  </tr>
-                  <tr>
-                    <th>Customer Email</th>
-                    <td><a href="mailto:{{customerEmail}}">{{customerEmail}}</a></td>
-                  </tr>
-                  <tr>
-                    <th>Start Date</th>
-                    <td>2015-08-08 8:21 PM MST</td>
-                  </tr>
-                  <tr>
-                    <th>Renewal Date</th>
-                    <td>2015-08-08 8:21 PM MST</td>
-                  </tr>
-                  <tr>
-                    <th>Box Status</th>
-                    <td>
-                      <span class="box-status box-{{statusId}}">{{boxStatusLabel}}</span>
-                      <span class="box-controls">
-                        (<a href="#" class="box-pause">Pause</a><a href="#"
-                          class="u-hide box-resume">Resume</a>
-                        | <a href="#" class="box-cancel">Cancel</a>)
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <form>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th>Customer Name</th>
+                      <td>{{customerName}}</td>
+                    </tr>
+                    <tr>
+                      <th>Customer Email</th>
+                      <td><a href="mailto:{{customerEmail}}">{{customerEmail}}</a></td>
+                    </tr>
+                    <tr>
+                      <th>Start Date</th>
+                      <td>2015-08-08 8:21 PM MST</td>
+                    </tr>
+                    <tr>
+                      <th>Renewal Frequency</th>
+                      <td>
+                        <select class="form-control box-renewal-freq">
+                          <option value="w2">Every 2 Weeks</option>
+                          <option value="m1">Every Month</option>
+                          <option value="m2">Every 2 Months</option>
+                          <option value="m3">Every 3 Months</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Renewal Date</th>
+                      <td>
+                        <div class="input-group col-md-6">
+                          <input type="text"
+                            class="form-control box-renewal-date"
+                            value="{{formatDate renewalDate}}">
+                          <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Box Status</th>
+                      <td>
+                        <span class="box-status box-{{statusId}}">{{boxStatusLabel}}</span>
+                        <span class="box-controls">
+                          (<a href="#" class="box-pause">Pause</a><a href="#"
+                            class="u-hide box-resume">Resume</a>
+                          | <a href="#" class="box-cancel">Cancel</a>)
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
             </div>
           </div>
 
           <h2>Order History</h2>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -63,8 +85,8 @@
                 <tbody>
                   {{#each orderHistory}}
                     <tr>
-                      <td><a href="#">{{orderId}}</a></td>
-                      <td>{{orderType}}</td>
+                      <td><a href="{{orderUrl}}">{{orderId}}</a></td>
+                      <td>{{orderTypeLabel}}</td>
                       <td>{{formatDate orderDate}}</td>
                     </tr>
                   {{/each}}
@@ -79,7 +101,7 @@
         <div class="row">
           {{#if boxItemsExist}}
 
-            <div class="col-md-6">
+            <div class="col-md-8">
               <table class="table table-striped">
                 <thead>
                   <tr>

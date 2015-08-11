@@ -1,10 +1,13 @@
 body
   -webkit-font-smoothing antialiased
-  padding 0 10px
+
+.box.container
+  margin 0
 
 .box
   font-family 'Source Sans Pro', 'sans-serif'
   color #5c6b80
+  margin-bottom 20px
   a
     color #273b4d
   a:hover, a:focus
@@ -22,10 +25,14 @@ body
     line-height 1.4em
     text-rendering optimizelegibility
     letter-spacing 0
+  h2
+    font-size 16px
+    font-weight bold
   table
     border 1px solid #D4E0EC
     border-collapse separate
     width 100%
+    margin-bottom 0
     th
       background-color #F9FAFC
       font-weight 100
@@ -63,6 +70,20 @@ body
       background-color #f0ad4e
     .box-controls
       margin-left 5px
+    table
+      // border none
+      th
+        width 35%
+        vertical-align middle
+        border none
+        font-weight bold
+      .box-th-next-ship-date
+        vertical-align top
+        padding-top 15px
+      td
+        border none
+    .box-ship-message
+      margin-top 5px
   .box-message
     border 1px solid #D4E0EC
     background-color #F1F2F4
@@ -70,7 +91,7 @@ body
     border-radius 5px
     ul
       margin 10px 0
-      list-style disc inside
+      padding-left 20px
       li
         margin 0
 
@@ -91,3 +112,8 @@ body
     table
       tr
         cursor pointer
+  .a-box
+    table
+      th
+        width 30%
+        vertical-align middle

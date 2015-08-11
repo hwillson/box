@@ -23,3 +23,5 @@ aslagle:reactive-table
 twbs:bootstrap
 osv:mongo-counter
 dburles:collection-helpers
+cwohlman:audited-collections
+rajit:bootstrap3-datepicker

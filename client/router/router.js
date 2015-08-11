@@ -1,6 +1,6 @@
 FlowRouter.route('/');
 
-FlowRouter.route('/my-box', {
+FlowRouter.route('/box', {
   action: function (params, queryParams) {
     if (queryParams && queryParams.id) {
       BX.Session.set('boxId', queryParams.id);
