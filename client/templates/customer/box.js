@@ -77,6 +77,11 @@ Template.box.helpers({
 
   boxItems: function () {
     return BX.Collection.BoxItems.find();
+  },
+
+  boxTotal: function () {
+    var box = BX.Collection.Boxes.findOne();
+    return BX.Collection.BoxItems.totalDiscountedAmount(box._id);
   }
 
 });
@@ -134,6 +139,24 @@ Template.box.events({
   'change .box-renewal-freq': function (e) {
     var frequencyId = $(e.currentTarget).find(':selected').val();
     this.updateRenewalFrequency(frequencyId);
+  },
+
+  'click .quantity-up': function (e) {
+    this.setQuantity(this.quantity + 1);
+    $(e.currentTarget).blur();
+  },
+
+  'click .quantity-down': function (e) {
+    var quantity = this.quantity;
+    if (quantity > 1) {
+      this.setQuantity(this.quantity - 1);
+    }
+    $(e.currentTarget).blur();
+  },
+
+  'change .quantity': function (e) {
+    var quantity = $(e.currentTarget).val();
+    this.setQuantity(quantity);
   }
 
 });

@@ -27,8 +27,14 @@
                       <td><a href="mailto:{{customerEmail}}">{{customerEmail}}</a></td>
                     </tr>
                     <tr>
+                      <th>Box Total</th>
+                      <td>
+                        ${{formatPrice boxTotal}}
+                      </td>
+                    </tr>
+                    <tr>
                       <th>Start Date</th>
-                      <td>2015-08-08 8:21 PM MST</td>
+                      <td>{{formatDate startDate}}</td>
                     </tr>
                     <tr>
                       <th>Renewal Frequency</th>
@@ -127,7 +133,7 @@
                         {{quantity}}
                       </td>
                       <td class="box-item-price">
-                        ${{totalPrice}}
+                        ${{formatPrice totalDiscountedPrice}}
                       </td>
                     </tr>
                   {{/each}}

@@ -64,6 +64,10 @@ Template.adminBox.helpers({
 
   orderHistory: function () {
     return BX.Collection.BoxOrders.find();
+  },
+
+  boxTotal: function () {
+    return BX.Collection.BoxItems.totalDiscountedAmount(this._id);
   }
 
 });
