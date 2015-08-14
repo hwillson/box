@@ -51,8 +51,7 @@ Meteor.methods({
   addToBox: function (boxItem) {
     var boxItemId;
     check(boxItem, Object);
-    setResponseHeaders();
-    boxItemId = BX.Collection.BoxItems.insert(boxItem);
+    boxItemId = BX.Collection.BoxItems.addBoxItem(boxItem);
     return boxItemId;
   },
 
@@ -65,18 +64,15 @@ Meteor.methods({
         renewalDate = BX.Utility.Date.formatDate(box.renewalDate);
       }
     }
-    setResponseHeaders();
     return renewalDate;
   }
 
 });
 
-var setResponseHeaders = function () {
-  JsonRoutes.setResponseHeaders({
-    'Cache-Control': 'no-store',
-    'Pragma': 'no-cache',
-    'Access-Control-Allow-Origin': 'http://thefeed.octonary.com',
-    'Access-Control-Allow-Methods': 'POST',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-  });
-};
+JsonRoutes.setResponseHeaders({
+  'Cache-Control': 'no-store',
+  'Pragma': 'no-cache',
+  'Access-Control-Allow-Origin': Meteor.settings.public.storeUrl,
+  'Access-Control-Allow-Methods': 'POST',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+});

@@ -1,5 +1,6 @@
 {
   "public": {
+    "storeUrl": "http://thefeed.octonary.com",
     "boxOrderUrl": "http://thefeed.octonary.com/wp-admin/post.php?action=edit&post=",
     "boxPageUrl": "http://thefeed.octonary.com/my-account"
   }
