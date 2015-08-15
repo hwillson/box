@@ -4,9 +4,9 @@ Meteor.methods({
     var existingCustomer, customerId;
     check(customer, Object);
     existingCustomer =
-      BX.Collection.Customer.findOne({ externalId: customer.externalId });
+      BX.Collection.Customers.findOne({ externalId: customer.externalId });
     if (!existingCustomer) {
-      customerId = BX.Collection.Customer.insert(customer);
+      customerId = BX.Collection.Customers.insert(customer);
     } else {
       customerId = existingCustomer._id;
     }
