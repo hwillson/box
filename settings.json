@@ -2,6 +2,8 @@
   "public": {
     "storeUrl": "http://thefeed.octonary.com",
     "boxOrderUrl": "http://thefeed.octonary.com/wp-admin/post.php?action=edit&post=",
-    "boxPageUrl": "http://thefeed.octonary.com/my-account"
+    "boxPageUrl": "http://thefeed.octonary.com/my-account",
+    "customerUrl": "http://thefeed.octonary.com/wp-admin/user-edit.php?user_id=",
+    "customerOrdersUrl": "http://thefeed.octonary.com/wp-admin/edit.php?post_status=all&post_type=shop_order&_customer_user="
   }
 }

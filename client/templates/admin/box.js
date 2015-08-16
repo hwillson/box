@@ -1,6 +1,11 @@
 Template.adminBox.onCreated(function () {
   var boxId = BX.Session.get('boxId');
-  this.subscribe('boxAnyStatus', boxId);
+  this.subscribe('boxAnyStatus', boxId, {
+    onReady: _.bind(function () {
+      var box = BX.Collection.Boxes.findOne();
+      this.subscribe('singleCustomer', box.customerId);
+    }, this)
+  });
   this.subscribe('boxItemsForBox', boxId);
   this.subscribe('boxOrders', boxId);
 });
@@ -62,12 +67,26 @@ Template.adminBox.helpers({
     return BX.Collection.BoxItems.find();
   },
 
+  ordersExist: function () {
+    return BX.Collection.BoxOrders.find().count();
+  },
+
   orderHistory: function () {
     return BX.Collection.BoxOrders.find();
   },
 
-  boxTotal: function () {
-    return BX.Collection.BoxItems.totalDiscountedAmount(this._id);
+  boxPrice: function () {
+    return BX.Collection.BoxItems.boxPrice(this._id);
+  },
+
+  customerUrl: function () {
+    var customer = this.getCustomer();
+    return Meteor.settings.public.customerUrl + customer.externalId;
+  },
+
+  customerOrdersUrl: function () {
+    var customer = this.getCustomer();
+    return Meteor.settings.public.customerOrdersUrl + customer.externalId;
   }
 
 });

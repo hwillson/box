@@ -79,9 +79,9 @@ Template.box.helpers({
     return BX.Collection.BoxItems.find();
   },
 
-  boxTotal: function () {
+  boxPrice: function () {
     var box = BX.Collection.Boxes.findOne();
-    return BX.Collection.BoxItems.totalDiscountedAmount(box._id);
+    return BX.Collection.BoxItems.boxPrice(box._id);
   }
 
 });

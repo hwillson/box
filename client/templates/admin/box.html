@@ -12,7 +12,7 @@
 
         {{#with box}}
 
-          <h2>Details</h2>
+          <h2>Box Details</h2>
           <div class="row">
             <div class="col-md-4">
               <form>
@@ -20,7 +20,13 @@
                   <tbody>
                     <tr>
                       <th>Customer Name</th>
-                      <td>{{customerName}}</td>
+                      <td>
+                        <a href="{{customerUrl}}"
+                          title="Click to see customer account">{{customerName}}</a>
+                        (<a href="{{customerOrdersUrl}}"
+                            title="Click to see all customer orders">All
+                          orders &raquo;</a>)
+                      </td>
                     </tr>
                     <tr>
                       <th>Customer Email</th>
@@ -29,7 +35,7 @@
                     <tr>
                       <th>Box Total</th>
                       <td>
-                        ${{formatPrice boxTotal}}
+                        ${{formatPrice boxPrice}}
                       </td>
                     </tr>
                     <tr>
@@ -77,33 +83,37 @@
             </div>
           </div>
 
-          <h2>Order History</h2>
+          <h2>Box Order History</h2>
           <div class="row">
             <div class="col-md-8">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Order Type</th>
-                    <th>Order Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#each orderHistory}}
+              {{#if ordersExist}}
+                <table class="table table-striped">
+                  <thead>
                     <tr>
-                      <td><a href="{{orderUrl}}">{{orderId}}</a></td>
-                      <td>{{orderTypeLabel}}</td>
-                      <td>{{formatDate orderDate}}</td>
+                      <th>Order ID</th>
+                      <th>Order Type</th>
+                      <th>Order Date</th>
                     </tr>
-                  {{/each}}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {{#each orderHistory}}
+                      <tr>
+                        <td><a href="{{orderUrl}}">{{orderId}}</a></td>
+                        <td>{{orderTypeLabel}}</td>
+                        <td>{{formatDate orderDate}}</td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              {{else}}
+                <p>This subscription was migrated from the old WC subscription system. No orders have been placed using the new system.</p>
+              {{/if}}
             </div>
           </div>
 
         {{/with}}
 
-        <h2>Items</h2>
+        <h2>Box Items</h2>
         <div class="row">
           {{#if boxItemsExist}}
 
@@ -133,7 +143,7 @@
                         {{quantity}}
                       </td>
                       <td class="box-item-price">
-                        ${{formatPrice totalDiscountedPrice}}
+                        ${{formatPrice totalCurrentPrice}}
                       </td>
                     </tr>
                   {{/each}}
@@ -155,7 +165,5 @@
     {{/if}}
 
   </div>
-
-
 
 </template>
