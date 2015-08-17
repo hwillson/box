@@ -13,7 +13,7 @@
                 <table class="table">
                   <tbody>
                     <tr>
-                      <th>Subscription Status</th>
+                      <th class="box-th-sub-status">Subscription Status</th>
                       <td>
                         <span class="box-status box-{{statusId}}">{{boxStatusLabel}}</span>
                         <span class="box-controls">
@@ -70,7 +70,8 @@
           <h2>Box Contents</h2>
           <div class="row">
             <div class="col-md-8">
-              <table>
+
+              <table class="hidden-xs">
                 <thead>
                   <tr>
                     <th></th>
@@ -119,6 +120,48 @@
                   {{/each}}
                 </tbody>
               </table>
+
+              <div class="visible-xs-block">
+                {{#each boxItems}}
+                  <div class="box-item">
+                    <div class="row">
+                      <div class="col-xs-1">
+                        <a href="#" class="remove-box-item">
+                          <i class="fa fa-remove"></i>
+                        </a>
+                      </div>
+                      <div class="col-xs-5 text-center">
+                        <img src="{{productImage}}">
+                      </div>
+                      <div class="col-xs-2">
+                        <strike>${{formatPrice totalPrice}}</strike>
+                        ${{formatPrice totalDiscountedPrice}}
+                      </div>
+                      <div class="col-xs-3">
+                        <div class="input-group spinner">
+                          <input type="text" class="form-control quantity"
+                            value="{{quantity}}">
+                          <div class="input-group-btn-vertical">
+                            <button class="btn btn-default quantity-up"
+                                type="button">
+                              <i class="fa fa-caret-up"></i>
+                            </button>
+                            <button class="btn btn-default quantity-down"
+                                type="button">
+                              <i class="fa fa-caret-down"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <a href="{{productUrl}}">{{productName}}</a>
+                      <p>({{variationDetails}})</p>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+
             </div>
             <div class="col-md-4">
               <div class="box-message">

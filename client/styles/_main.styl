@@ -67,20 +67,22 @@ body
       padding 1px 7px 2px 7px
       text-transform uppercase
       font-weight bold
-      margin-left 5px
+      margin-right 5px
     .box-active
       background-color #5cb85c
     .box-paused
       background-color #f0ad4e
     .box-controls
-      margin-left 5px
+      white-space nowrap
+      line-height 25px
     table
-      // border none
       th
         width 35%
         vertical-align middle
         border none
         font-weight bold
+      .box-th-sub-status
+        vertical-align top
       .box-th-next-ship-date
         vertical-align top
         padding-top 15px
@@ -88,6 +90,15 @@ body
         border none
     .box-ship-message
       margin-top 5px
+  .box-item
+    margin-bottom 20px
+    border-bottom 1px solid #d4e0ec
+    padding-bottom 10px
+    p
+      margin 0
+  .box-item:first-child
+    border-top 1px solid #d4e0ec
+    padding-top 20px
   .box-message
     border 1px solid #D4E0EC
     background-color #F1F2F4

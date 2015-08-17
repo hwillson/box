@@ -9,14 +9,16 @@ Template.box.onCreated(function () {
   if (window.location != window.parent.location) {
     this.autorun(function () {
       if (Template.instance().subscriptionsReady()) {
-        Tracker.afterFlush(function () {
-          $('img:last').on('load', function () {
-            var parentUrl = Meteor.settings.public.boxPageUrl;
-            $.postMessage({
-              if_height: $('body').outerHeight(true)
-            }, parentUrl, parent);
+        if (BX.Collection.BoxItems.find().fetch()) {
+          Tracker.afterFlush(function () {
+            $('img:last').on('load', function () {
+              var parentUrl = Meteor.settings.public.boxPageUrl;
+              $.postMessage({
+                if_height: $('body').outerHeight(true)
+              }, parentUrl, parent);
+            });
           });
-        });
+        }
       }
     });
   }
@@ -44,7 +46,9 @@ Template.box.onRendered(function () {
       });
 
       Meteor.defer(function () {
-        $('.box-renewal-freq').val(box.renewalFrequencyId);
+        if (box) {
+          $('.box-renewal-freq').val(box.renewalFrequencyId);
+        }
       });
 
     }
