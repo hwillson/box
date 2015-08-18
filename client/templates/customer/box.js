@@ -3,6 +3,7 @@ Template.box.onCreated(function () {
   var boxId = BX.Session.get('boxId');
   this.subscribe('boxNotCancelled', boxId);
   this.subscribe('boxItemsForBox', boxId);
+  this.subscribe('productVariations');
 
   // If called from an iframe, pass the content height back to the iframe so
   // it can re-size dynamically.
@@ -86,6 +87,16 @@ Template.box.helpers({
   boxPrice: function () {
     var box = BX.Collection.Boxes.findOne();
     return BX.Collection.BoxItems.boxPrice(box._id);
+  },
+
+  variations: function () {
+    return BX.Collection.ProductVariations.findProductVariations(
+      this.productId
+    );
+  },
+
+  selectedIfEquals: function (selectedVariationId) {
+    return (this.variationId === selectedVariationId) ? 'selected' : '';
   }
 
 });
@@ -161,6 +172,11 @@ Template.box.events({
   'change .quantity': function (e) {
     var quantity = $(e.currentTarget).val();
     this.setQuantity(quantity);
+  },
+
+  'change .box-item-variations': function (e) {
+    var variationId = $(e.currentTarget).val();
+    this.updateVariationId(variationId);
   }
 
 });

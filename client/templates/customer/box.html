@@ -93,8 +93,19 @@
                         <img src="{{productImage}}">
                       </td>
                       <td>
-                        <a href="{{productUrl}}">{{productName}}</a>
-                        <p>({{variationDetails}})</p>
+                        <p>
+                          <a href="{{productUrl}}">{{productName}}</a>
+                        </p>
+                        {{#if variationId}}
+                          <select class="form-control box-item-variations">
+                            {{#each variations}}
+                              <option value="{{variationId}}"
+                                  {{selectedIfEquals ../variationId}}>
+                                {{name}}
+                              </option>
+                            {{/each}}
+                          </select>
+                        {{/if}}
                       </td>
                       <td class="box-item-quantity">
                         <div class="input-group spinner">
@@ -155,8 +166,19 @@
                       </div>
                     </div>
                     <div>
-                      <a href="{{productUrl}}">{{productName}}</a>
-                      <p>({{variationDetails}})</p>
+                      <p>
+                        <a href="{{productUrl}}">{{productName}}</a>
+                      </p>
+                      {{#if variationId}}
+                        <select class="form-control box-item-variations">
+                          {{#each variations}}
+                            <option value="{{variationId}}"
+                                {{selectedIfEquals ../variationId}}>
+                              {{name}}
+                            </option>
+                          {{/each}}
+                        </select>
+                      {{/if}}
                     </div>
                   </div>
                 {{/each}}
