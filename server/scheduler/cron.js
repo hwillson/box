@@ -9,5 +9,8 @@ SyncedCron.add({
 });
 
 Meteor.startup(function () {
+  // Synch all product variations when the application starts, then schedule
+  // for once a day.
+  ProductSynch.fetchProductVariations();
   SyncedCron.start();
 });

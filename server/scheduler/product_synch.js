@@ -17,6 +17,8 @@ ProductSynch = {
       });
     }
 
+    console.log('Product variations have been synched.');
+
   }
 
 };
