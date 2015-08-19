@@ -1,5 +1,5 @@
 SyncedCron.add({
-  name: 'Synch Product Variants',
+  name: 'Synch Product Variations',
   schedule: function (parser) {
     return parser.text('every 24 hours');
   },

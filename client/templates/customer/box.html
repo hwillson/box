@@ -97,18 +97,18 @@
                         </a>
                       </td>
                       <td class="box-item-image">
-                        <img src="{{productImage}}">
+                        <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
                       </td>
                       <td>
                         <p>
-                          <a href="{{productUrl}}">{{productName}}</a>
+                          <a href="{{productVariation.productUrl}}">{{productVariation.productName}}</a>
                         </p>
                         {{#if variationId}}
                           <select class="form-control box-item-variations">
                             {{#each variations}}
                               <option value="{{variationId}}"
                                   {{selectedIfEquals ../variationId}}>
-                                {{name}}
+                                {{variationName}}
                               </option>
                             {{/each}}
                           </select>
@@ -149,7 +149,7 @@
                         </a>
                       </div>
                       <div class="col-xs-5 text-center">
-                        <img src="{{productImage}}">
+                        <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
                       </div>
                       <div class="col-xs-2">
                         <strike>${{formatPrice totalPrice}}</strike>
@@ -174,14 +174,14 @@
                     </div>
                     <div>
                       <p>
-                        <a href="{{productUrl}}">{{productName}}</a>
+                        <a href="{{productVariation.productUrl}}">{{productVariation.productName}}</a>
                       </p>
                       {{#if variationId}}
                         <select class="form-control box-item-variations">
                           {{#each variations}}
                             <option value="{{variationId}}"
                                 {{selectedIfEquals ../variationId}}>
-                              {{name}}
+                              {{variationName}}
                             </option>
                           {{/each}}
                         </select>
@@ -194,7 +194,7 @@
             </div>
             <div class="col-md-4">
               <div class="box-message">
-                Your next box will be packaged, billed and prepared for shipping on <strong>{{boxRenewalDate}}</strong>, at which point you will be billed <strong>${{formatPrice boxPrice}}</strong>. To make changes to your box at any point you can:
+                Your next box will be packaged, billed and prepared for shipping on <strong>{{boxRenewalDate}}</strong>, at which point you will be billed <strong>${{formatPrice box.boxPrice}}</strong>. To make changes to your box at any point you can:
                 <ul>
                   <li>Adjust box item flavors and quantities;</li>
                   <li>Remove items from your box;</li>

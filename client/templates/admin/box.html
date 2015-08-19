@@ -131,12 +131,12 @@
                   {{#each boxItems}}
                     <tr>
                       <td class="box-item-image">
-                        <img src="{{productImage}}">
+                        <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
                       </td>
                       <td>
-                        <a href="{{productUrl}}">{{productName}}</a>
-                        {{#if variationName}}
-                          <p>({{variationName}})</p>
+                        <a href="{{productVariation.productUrl}}">{{productVariation.productName}}</a>
+                        {{#if productVariation.variationName}}
+                          <p>({{productVariation.variationName}})</p>
                         {{/if}}
                       </td>
                       <td class="box-item-quantity">

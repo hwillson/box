@@ -6,6 +6,7 @@ Template.adminBox.onCreated(function () {
       this.subscribe('singleCustomer', box.customerId);
     }, this)
   });
+  this.subscribe('productVariations');
   this.subscribe('boxItemsForBox', boxId);
   this.subscribe('boxOrders', boxId);
 });
@@ -73,10 +74,6 @@ Template.adminBox.helpers({
 
   orderHistory: function () {
     return BX.Collection.BoxOrders.find();
-  },
-
-  boxPrice: function () {
-    return BX.Collection.BoxItems.boxPrice(this._id);
   },
 
   customerUrl: function () {

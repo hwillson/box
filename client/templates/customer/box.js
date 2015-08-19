@@ -84,11 +84,6 @@ Template.box.helpers({
     return BX.Collection.BoxItems.find();
   },
 
-  boxPrice: function () {
-    var box = BX.Collection.Boxes.findOne();
-    return BX.Collection.BoxItems.boxPrice(box._id);
-  },
-
   variations: function () {
     return BX.Collection.ProductVariations.findProductVariations(
       this.productId
