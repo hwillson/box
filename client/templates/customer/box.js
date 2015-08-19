@@ -142,7 +142,7 @@ Template.box.events({
       confirmButtonText: 'Definitely',
       animation: false
     }, _.bind(function () {
-      this.updateBoxStatus(BX.Model.BoxStatus.cancelled.id);
+      this.cancelBox();
     }, this));
   },
 

@@ -13,7 +13,17 @@ ProductSynch = {
     if (response && response.data && response.data.data) {
       products = JSON.parse(response.data.data);
       products.forEach(function (product) {
-        BX.Collection.ProductVariations.insert(product);
+        BX.Collection.ProductVariations.update(
+          {
+            variationId: product.variationId
+          },
+          {
+            $set: product
+          },
+          {
+            upsert: true
+          }
+        );
       });
     }
 

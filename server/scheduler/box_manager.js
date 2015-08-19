@@ -37,6 +37,32 @@ BoxManager = {
 
     }
 
+  },
+
+  cancelBox: function (boxId) {
+
+    var box, customer, response, boxCancelled = false;
+
+    box = BX.Collection.Boxes.findOne({ _id: boxId });
+    customer = box.getCustomer();
+
+    if (box) {
+
+      response = HTTP.get(
+        Meteor.settings.public.storeUrl + '/wp-admin/admin-ajax.php', {
+          query: 'action=cancel_box&user_id=' + customer.externalId
+        }
+      );
+
+      if (response && response.data && response.data.success) {
+        box.updateBoxStatus(BX.Model.BoxStatus.cancelled.id);
+        boxCancelled = true;
+      }
+
+    }
+
+    return boxCancelled;
+
   }
 
 };

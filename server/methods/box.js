@@ -82,6 +82,11 @@ Meteor.methods({
       }
     }
     return renewalDate;
+  },
+
+  cancelBox: function (boxId) {
+    check(boxId, String);
+    return BoxManager.cancelBox(boxId);
   }
 
 });

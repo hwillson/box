@@ -114,7 +114,7 @@ Template.adminBox.events({
 
   'click .box-cancel': function (e) {
     e.preventDefault();
-    this.updateBoxStatus(BX.Model.BoxStatus.cancelled.id);
+    this.cancelBox();
     $('.box-controls').hide();
   },
 
