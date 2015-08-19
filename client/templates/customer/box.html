@@ -101,7 +101,7 @@
                       </td>
                       <td>
                         <p>
-                          <a href="{{productVariation.productUrl}}">{{productVariation.productName}}</a>
+                          <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}">{{productVariation.productName}}</a>
                         </p>
                         {{#if variationId}}
                           <select class="form-control box-item-variations">
@@ -174,7 +174,7 @@
                     </div>
                     <div>
                       <p>
-                        <a href="{{productVariation.productUrl}}">{{productVariation.productName}}</a>
+                        <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}">{{productVariation.productName}}</a>
                       </p>
                       {{#if variationId}}
                         <select class="form-control box-item-variations">

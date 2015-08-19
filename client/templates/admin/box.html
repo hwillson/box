@@ -134,7 +134,7 @@
                         <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
                       </td>
                       <td>
-                        <a href="{{productVariation.productUrl}}">{{productVariation.productName}}</a>
+                        <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}">{{productVariation.productName}}</a>
                         {{#if productVariation.variationName}}
                           <p>({{productVariation.variationName}})</p>
                         {{/if}}
