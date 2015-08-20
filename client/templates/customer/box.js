@@ -133,8 +133,9 @@ Template.box.events({
       text: 'Are you sure you want to cancel your monthly box? Cancelling will completely remove your box from your account (all box selections will be removed). You will no longer receive monthly shipments.',
       type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#DD6B55',
-      confirmButtonText: 'Definitely',
+      cancelButtonText: 'Keep Subscription',
+      confirmButtonText: 'Cancel Subscription',
+      confirmButtonColor: '#D0D0D0',
       animation: false
     }, _.bind(function () {
       this.cancelBox();
