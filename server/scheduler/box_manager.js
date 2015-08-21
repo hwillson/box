@@ -1,16 +1,18 @@
 BoxManager = {
 
   renewBoxes: function () {
-    var boxes, boxCount = 0;
+    var date, boxes, boxCount = 0;
+    //date = moment().toDate();
+    date = moment().add(2, 'days').toDate();
     boxes = BX.Collection.Boxes.find({
       renewalDate: {
-        $lte: new Date()
+        $lte: date
       }
     });
     boxCount = boxes.count();
-    // boxes.forEach(_.bind(function (box) {
-    //   this.createBoxRenewal(box._id);
-    // }, this));
+    boxes.forEach(_.bind(function (box) {
+      this.createBoxRenewal(box._id);
+    }, this));
     return boxCount;
   },
 

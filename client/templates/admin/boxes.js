@@ -6,7 +6,7 @@ Template.adminBoxes.helpers({
 
   settings: function () {
     return {
-      collection: BX.Collection.Boxes.find(),
+      collection: BX.Collection.Boxes,
       fields: [
         {
           key: 'referenceId',
@@ -16,7 +16,9 @@ Template.adminBoxes.helpers({
           key: 'statusId',
           label: 'Status',
           fn: function (value, object) {
-            return BX.Model.BoxStatus[value].label;
+            if (value) {
+              return BX.Model.BoxStatus[value].label;
+            }
           }
         },
         {

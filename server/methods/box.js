@@ -43,9 +43,9 @@ Meteor.methods({
         customerFirstName: boxData.customer.firstName,
         customerLastName: boxData.customer.lastName,
         customerEmail: boxData.customer.email,
-        startDate: startDate.toISOString(),
+        startDate: startDate.toDate(),
         renewalFrequencyId: renewalFrequencyId,
-        renewalDate: renewalDate.toISOString(),
+        renewalDate: renewalDate.toDate(),
         statusId: BX.Model.BoxStatus.active.id
       };
       boxId = BX.Collection.Boxes.insert(box);
