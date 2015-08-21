@@ -12,6 +12,7 @@ ProductSynch = {
 
     if (response && response.data && response.data.data) {
       products = JSON.parse(response.data.data);
+      BX.Collection.ProductVariations.remove({});
       products.forEach(function (product) {
         BX.Collection.ProductVariations.update(
           {

@@ -24,10 +24,12 @@ Meteor.methods({
       }
 
       if (boxData.box.migratedRenewalDate) {
-        renewalDate =
-          moment(boxData.box.migratedRenewalDate).hour(12).minute(0).second(0)
+        renewalDate = BX.Utility.Date.newMomentWithDefaultTime(
+          boxData.box.migratedRenewalDate
+        );
         if (renewalDate.isBefore(moment())) {
-          renewalDate = moment().add(1, 'days').hour(12).minute(0).second(0);
+          renewalDate =
+            BX.Utility.Date.newMomentWithDefaultTime().add(1, 'days');
         }
       } else {
         renewalDate = BX.Model.BoxRenewalFrequency.renewalDateForFrequency(
@@ -41,9 +43,9 @@ Meteor.methods({
         customerFirstName: boxData.customer.firstName,
         customerLastName: boxData.customer.lastName,
         customerEmail: boxData.customer.email,
-        startDate: startDate.toDate(),
+        startDate: startDate.toISOString(),
         renewalFrequencyId: renewalFrequencyId,
-        renewalDate: renewalDate.toDate(),
+        renewalDate: renewalDate.toISOString(),
         statusId: BX.Model.BoxStatus.active.id
       };
       boxId = BX.Collection.Boxes.insert(box);

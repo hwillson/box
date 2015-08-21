@@ -1,12 +1,36 @@
 BoxManager = {
 
+  renewBoxes: function () {
+    var boxes, boxCount = 0;
+    boxes = BX.Collection.Boxes.find({
+      renewalDate: {
+        $lte: new Date()
+      }
+    });
+    boxCount = boxes.count();
+    // boxes.forEach(_.bind(function (box) {
+    //   this.createBoxRenewal(box._id);
+    // }, this));
+    return boxCount;
+  },
+
   createBoxRenewal: function (boxId) {
-    var box, boxItems, customer, renewalData = {}, responseData, order;
+
+    var box, boxItems = [], customer, renewalData = {}, responseData, order,
+        currentRenewalDate, nextRenewalDate;
+
     if (boxId) {
 
       box = BX.Collection.Boxes.findOne({ _id: boxId });
       customer = box.getCustomer();
-      boxItems = box.getBoxItems();
+      box.getBoxItems().forEach(function (boxItem) {
+        boxItems.push({
+          productId: boxItem.productId,
+          variationId: boxItem.variationId,
+          quantity: boxItem.quantity,
+          discountPercent: boxItem.discountPercent
+        });
+      });
 
       renewalData.boxId = boxId;
       renewalData.customerId = customer.externalId;
@@ -27,6 +51,10 @@ BoxManager = {
           order = responseData.data;
           order.boxId = boxId;
           BX.Collection.BoxOrders.insert(order);
+          // Increase next renewal date by renewal frequency.
+          box.resetRenewalDate();
+          // Make sure status is set to active
+          box.updateBoxStatus(BX.Model.BoxStatus.active.id);
         } else {
           // Set to payment failed status and advance renewal date to tomorrow
           // (so payment for this box is tried again tomorrow).
