@@ -9,7 +9,7 @@ Template.adminBoxes.helpers({
       collection: BX.Collection.Boxes,
       fields: [
         {
-          key: 'referenceId',
+          key: '_id',
           label: 'Box ID'
         },
         {

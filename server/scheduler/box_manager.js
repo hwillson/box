@@ -2,8 +2,7 @@ BoxManager = {
 
   renewBoxes: function () {
     var date, boxes, boxCount = 0;
-    //date = moment().toDate();
-    date = moment().add(2, 'days').toDate();
+    date = moment().toDate();
     boxes = BX.Collection.Boxes.find({
       renewalDate: {
         $lte: date
