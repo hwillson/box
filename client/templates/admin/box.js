@@ -117,7 +117,11 @@ Template.adminBox.events({
 
   'change .box-renewal-date': _.debounce(function (e) {
     var selectedDate = $(e.currentTarget).val();
-    this.updateRenewalDate(selectedDate);
+    if (selectedDate) {
+      this.updateRenewalDate(selectedDate);
+    } else {
+      $(e.currentTarget).val(BX.Utility.Date.formatDate(this.renewalDate));
+    }
   }, 100),
 
   'change .box-renewal-freq': function (e) {
