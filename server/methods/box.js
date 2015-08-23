@@ -86,6 +86,18 @@ Meteor.methods({
     return renewalDate;
   },
 
+  getBoxRenewalDayCount: function (data) {
+    var box, renewalDays;
+    if (data && data.boxId) {
+      check(data.boxId, String);
+      box = BX.Collection.Boxes.findOne({ _id: data.boxId });
+      if (box) {
+        renewalDays = moment(box.renewalDate).diff(moment(), 'days');
+      }
+    }
+    return renewalDays;
+  },
+
   cancelBox: function (boxId) {
     check(boxId, String);
     return BoxManager.cancelBox(boxId);
