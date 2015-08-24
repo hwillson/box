@@ -3,10 +3,16 @@ BX.Collection.BoxItems.permit(['remove', 'update']).apply();
 
 // Restrict simple:rest access to only /methods/api* methods.
 JsonRoutes.Middleware.use(function (req, res, next) {
-  if (req.url.indexOf('/methods/api') === 0) {
-    next();
+  var url = req.url;
+  if ((url.indexOf('/methods') === 0)
+      || (url.indexOf('/publications') === 0)) {
+    if (url.indexOf('/api') > -1) {
+      next();
+    } else {
+      res.end();
+    }
   } else {
-    res.end();
+    next();
   }
 });
 
