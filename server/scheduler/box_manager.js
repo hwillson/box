@@ -18,7 +18,7 @@ BoxManager = {
   createBoxRenewal: function (boxId) {
 
     var box, boxItems = [], customer, renewalData = {}, responseData, order,
-        currentRenewalDate, nextRenewalDate;
+        currentRenewalDate, nextRenewalDate, auth;
 
     if (boxId) {
 
@@ -39,6 +39,9 @@ BoxManager = {
 
       var response = HTTP.post(
         Meteor.settings.public.storeUrl + '/wp-admin/admin-ajax.php', {
+          headers: {
+            authorization: this.basicAuthHeader()
+          },
           query: 'action=create_subscription_renewal_order',
           params: {
             renewalData: JSON.stringify(renewalData)
@@ -79,6 +82,9 @@ BoxManager = {
 
       response = HTTP.get(
         Meteor.settings.public.storeUrl + '/wp-admin/admin-ajax.php', {
+          headers: {
+            authorization: this.basicAuthHeader()
+          },
           query: 'action=cancel_box&user_id=' + customer.externalId
         }
       );
@@ -92,6 +98,13 @@ BoxManager = {
 
     return boxCancelled;
 
+  },
+
+  basicAuthHeader: function () {
+    return 'Basic ' + Base64.encode(
+      Meteor.settings.private.tfAuthUser + ':'
+      + Meteor.settings.private.tfAuthPass
+    );
   }
 
 };
