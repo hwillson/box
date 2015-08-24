@@ -6,7 +6,7 @@ JsonRoutes.Middleware.use(function (req, res, next) {
   var url = req.url;
   if ((url.indexOf('/methods') === 0)
       || (url.indexOf('/publications') === 0)) {
-    if (url.indexOf('/api') > -1) {
+    if (url.indexOf('/api_') > -1) {
       next();
     } else {
       res.end();

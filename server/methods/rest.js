@@ -1,6 +1,6 @@
 Meteor.methods({
 
-  apiCreateNewBox: function (boxData) {
+  api_CreateNewBox: function (boxData) {
 
     var boxId, startDate, renewalFrequencyId, renewalDate, box, boxItems,
         customerId, order;
@@ -67,14 +67,14 @@ Meteor.methods({
 
   },
 
-  apiAddToBox: function (boxItem) {
+  api_AddToBox: function (boxItem) {
     var boxItemId;
     check(boxItem, Object);
     boxItemId = BX.Collection.BoxItems.addBoxItem(boxItem);
     return boxItemId;
   },
 
-  apiBoxRenewalDate: function (data) {
+  api_BoxRenewalDate: function (data) {
     var box, renewalDate;
     if (data && data.boxId) {
       check(data.boxId, String);
@@ -86,7 +86,7 @@ Meteor.methods({
     return renewalDate;
   },
 
-  apiBoxRenewalDayCount: function (data) {
+  api_BoxRenewalDayCount: function (data) {
     var box, renewalDays;
     if (data && data.boxId) {
       check(data.boxId, String);
