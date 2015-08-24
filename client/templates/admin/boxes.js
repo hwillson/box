@@ -56,7 +56,9 @@ Template.adminBoxes.helpers({
 Template.adminBoxes.events({
 
   'click tbody tr': function (e) {
-    FlowRouter.go('/admin/box?id=' + this._id);
+    FlowRouter.go(
+      '/admin/box?id=' + this._id + '&token=' + BX.Session.get('token')
+    );
   }
 
 });

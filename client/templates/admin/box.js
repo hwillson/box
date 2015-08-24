@@ -92,7 +92,7 @@ Template.adminBox.events({
 
   'click .goto-boxes': function (e) {
     e.preventDefault;
-    FlowRouter.go('/admin/boxes');
+    FlowRouter.go('/admin/boxes?token=' + BX.Session.get('token'));
   },
 
   'click .box-pause': function (e) {
@@ -127,6 +127,31 @@ Template.adminBox.events({
   'change .box-renewal-freq': function (e) {
     var frequencyId = $(e.currentTarget).find(':selected').val();
     this.updateRenewalFrequency(frequencyId);
+  },
+
+  'click .box-renew-now': function (e) {
+    e.preventDefault();
+    sweetAlert({
+      title: 'Renew Box Immediately?',
+      text: 'This will immediately create a new renewal order (and bill the customer). Are you sure?',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Renew Now',
+      closeOnConfirm: false,
+      confirmButtonColor: '#D0D0D0',
+      animation: false
+    }, _.bind(function () {
+      $('.confirm').html('Renewing...');
+      Meteor.call(
+        'createBoxRenewal',
+        BX.Session.get('token'),
+        this._id,
+        function () {
+          swal('Renewal order has been created.');
+        }
+      );
+    }, this));
   }
 
 });
