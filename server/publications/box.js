@@ -1,20 +1,35 @@
-Meteor.publish('boxNotCancelled', function (boxId) {
+Meteor.publish('boxNotCancelled', function (token, boxId) {
+  check(token, String);
   check(boxId, String);
-  return BX.Collection.Boxes.find({
-    _id: boxId,
-    statusId: {
-      $in: [ BX.Model.BoxStatus.active.id, BX.Model.BoxStatus.paused.id ]
-    }
-  });
+  if (BX.Utility.Security.verifyAccess(token, boxId)) {
+    return BX.Collection.Boxes.find({
+      _id: boxId,
+      statusId: {
+        $in: [ BX.Model.BoxStatus.active.id, BX.Model.BoxStatus.paused.id ]
+      }
+    });
+  } else {
+    this.ready();
+  }
 });
 
-Meteor.publish('boxAnyStatus', function (boxId) {
+Meteor.publish('boxAnyStatus', function (token, boxId) {
+  check(token, String);
   check(boxId, String);
-  return BX.Collection.Boxes.find({
-    _id: boxId
-  });
+  if (BX.Utility.Security.verifyAccess(token, boxId)) {
+    return BX.Collection.Boxes.find({
+      _id: boxId
+    });
+  } else {
+    this.ready();
+  }
 });
 
-Meteor.publish('allBoxes', function () {
-  return BX.Collection.Boxes.find();
+Meteor.publish('allBoxes', function (token) {
+  check(token, String);
+  if (BX.Utility.Security.verifyAccess(token)) {
+    return BX.Collection.Boxes.find();
+  } else {
+    this.ready();
+  }
 });

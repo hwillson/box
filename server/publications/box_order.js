@@ -1,6 +1,11 @@
-Meteor.publish('boxOrders', function (boxId) {
+Meteor.publish('boxOrders', function (token, boxId) {
+  check(token, String);
   check(boxId, String);
-  return BX.Collection.BoxOrders.find({
-    boxId: boxId
-  });
+  if (BX.Utility.Security.verifyAccess(token)) {
+    return BX.Collection.BoxOrders.find({
+      boxId: boxId
+    });
+  } else {
+    this.ready();
+  }
 });

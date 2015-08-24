@@ -1,14 +1,14 @@
 Template.adminBox.onCreated(function () {
-  var boxId = BX.Session.get('boxId');
-  this.subscribe('boxAnyStatus', boxId, {
+  var token = BX.Session.get('token'), boxId = BX.Session.get('boxId');
+  this.subscribe('boxAnyStatus', token, boxId, {
     onReady: _.bind(function () {
       var box = BX.Collection.Boxes.findOne();
-      this.subscribe('singleCustomer', box.customerId);
+      this.subscribe('singleCustomer', token, box.customerId);
     }, this)
   });
   this.subscribe('productVariations');
-  this.subscribe('boxItemsForBox', boxId);
-  this.subscribe('boxOrders', boxId);
+  this.subscribe('boxItemsForBox', token, boxId);
+  this.subscribe('boxOrders', token, boxId);
 });
 
 Template.adminBox.onRendered(function () {

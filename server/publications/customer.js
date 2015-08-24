@@ -1,4 +1,9 @@
-Meteor.publish('singleCustomer', function (customerId) {
+Meteor.publish('singleCustomer', function (token, customerId) {
+  check(token, String);
   check(customerId, String);
-  return BX.Collection.Customers.find({ _id: customerId });
+  if (BX.Utility.Security.verifyAccess(token)) {
+    return BX.Collection.Customers.find({ _id: customerId });
+  } else {
+    this.ready();
+  }
 });

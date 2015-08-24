@@ -29,3 +29,4 @@ http
 percolate:synced-cron
 meteorhacks:kadira
 base64
+jparker:crypto-sha1

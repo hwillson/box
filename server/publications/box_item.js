@@ -1,4 +1,9 @@
-Meteor.publish('boxItemsForBox', function (boxId) {
+Meteor.publish('boxItemsForBox', function (token, boxId) {
+  check(token, String);
   check(boxId, String);
-  return BX.Collection.BoxItems.find({ boxId: boxId });
+  if (BX.Utility.Security.verifyAccess(token, boxId)) {
+    return BX.Collection.BoxItems.find({ boxId: boxId });
+  } else {
+    this.ready();
+  }
 });

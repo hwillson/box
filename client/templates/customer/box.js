@@ -1,8 +1,8 @@
 Template.box.onCreated(function () {
 
-  var boxId = BX.Session.get('boxId');
-  this.subscribe('boxNotCancelled', boxId);
-  this.subscribe('boxItemsForBox', boxId);
+  var token = BX.Session.get('token'), boxId = BX.Session.get('boxId');
+  this.subscribe('boxNotCancelled', token, boxId);
+  this.subscribe('boxItemsForBox', token, boxId);
   this.subscribe('productVariations');
 
   // If called from an iframe, pass the content height back to the iframe so

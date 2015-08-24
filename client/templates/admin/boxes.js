@@ -1,5 +1,5 @@
 Template.adminBoxes.onCreated(function () {
-  this.subscribe('allBoxes');
+  this.subscribe('allBoxes', BX.Session.get('token'));
 });
 
 Template.adminBoxes.helpers({

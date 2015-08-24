@@ -9,6 +9,7 @@
   "private": {
     "tfAuthUser": "tfwsuser",
     "tfAuthPass": "Q6Q-cSk-7Uy-yNm",
-    "whitelistIps": [ "45.79.174.64", "99.246.159.248" ]
+    "adminTokenSecret": "hpC-Mci-Zyr-tEG",
+    "customerTokenSecret": "goB-5XQ-WnU-rea"
   }
 }
