@@ -2,6 +2,10 @@ Template.registerHelper('formatDate', function (date) {
   return BX.Utility.Date.formatDate(date);
 });
 
+Template.registerHelper('formatLongDate', function (date) {
+  return BX.Utility.Date.formatLongDate(date);
+});
+
 Template.registerHelper('formatDateTime', function (date) {
   return BX.Utility.Date.formatDateTime(date);
 });
