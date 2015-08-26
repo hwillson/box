@@ -22,9 +22,11 @@
                       <th>Customer Name</th>
                       <td>
                         <a href="{{customerUrl}}"
-                          title="Click to see customer account">{{customerName}}</a>
+                          title="Click to see customer account"
+                          target="_top">{{customerName}}</a>
                         (<a href="{{customerOrdersUrl}}"
-                            title="Click to see all customer orders">All
+                            title="Click to see all customer orders"
+                            target="_top">All
                           orders &raquo;</a>)
                       </td>
                     </tr>
@@ -103,7 +105,7 @@
                   <tbody>
                     {{#each orderHistory}}
                       <tr>
-                        <td><a href="{{orderUrl}}">{{orderId}}</a></td>
+                        <td><a href="{{orderUrl}}" target="_top">{{orderId}}</a></td>
                         <td>{{orderTypeLabel}}</td>
                         <td>{{formatDate orderDate}}</td>
                       </tr>
@@ -139,7 +141,7 @@
                         <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
                       </td>
                       <td>
-                        <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}">{{productVariation.productName}}</a>
+                        <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}" target="_top">{{productVariation.productName}}</a>
                         {{#if productVariation.variationName}}
                           <p>({{productVariation.variationName}})</p>
                         {{/if}}
