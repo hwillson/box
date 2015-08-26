@@ -10,7 +10,6 @@ SyncedCron.add({
   }
 });
 
-/*
 SyncedCron.add({
   name: 'Create box order renewals',
   schedule: function (parser) {
@@ -23,7 +22,6 @@ SyncedCron.add({
     return 'Total boxes renewed: ' + boxesRenewed;
   }
 });
-*/
 
 Meteor.startup(function () {
   // Synch all product variations when the application starts.
