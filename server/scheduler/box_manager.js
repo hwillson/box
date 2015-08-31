@@ -1,18 +1,30 @@
 BoxManager = {
 
   renewBoxes: function () {
+
     var date, boxes, boxCount = 0;
     date = moment().toDate();
+
+    // Won't try to renew paused or cancelled boxes.
     boxes = BX.Collection.Boxes.find({
       renewalDate: {
         $lte: date
+      },
+      statusId: {
+        $nin: [
+          BX.Model.BoxStatus.paused.id,
+          BX.Model.BoxStatus.cancelled.id
+        ]
       }
     });
+
     boxCount = boxes.count();
     boxes.forEach(_.bind(function (box) {
       this.createBoxRenewal(box._id);
     }, this));
+
     return boxCount;
+
   },
 
   createBoxRenewal: function (boxId) {
@@ -36,6 +48,9 @@ BoxManager = {
       renewalData.boxId = boxId;
       renewalData.customerId = customer.externalId;
       renewalData.boxItems = boxItems;
+      renewalData.shippingMethodId = box.shippingMethodId;
+      renewalData.shippingMethodName = box.shippingMethodName;
+      renewalData.shippingCost = box.shippingCost;
 
       var response = HTTP.post(
         Meteor.settings.public.storeUrl + '/wp-admin/admin-ajax.php', {

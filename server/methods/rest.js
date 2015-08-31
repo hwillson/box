@@ -46,7 +46,10 @@ Meteor.methods({
         startDate: startDate.toDate(),
         renewalFrequencyId: renewalFrequencyId,
         renewalDate: renewalDate.toDate(),
-        statusId: BX.Model.BoxStatus.active.id
+        statusId: BX.Model.BoxStatus.active.id,
+        shippingMethodId: boxData.box.shippingMethodId,
+        shippingMethodName: boxData.box.shippingMethodName,
+        shippingCost: boxData.box.shippingCost
       };
       boxId = BX.Collection.Boxes.insert(box);
 
