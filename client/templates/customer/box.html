@@ -103,7 +103,9 @@
                         </a>
                       </td>
                       <td class="box-item-image">
-                        <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                        {{#if productVariation.productImage}}
+                          <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                        {{/if}}
                       </td>
                       <td>
                         <p>
@@ -155,7 +157,9 @@
                         </a>
                       </div>
                       <div class="col-xs-5 text-center">
-                        <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                        {{#if productVariation.productImage}}
+                          <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                        {{/if}}
                       </div>
                       <div class="col-xs-2">
                         <strike>${{formatPrice totalPrice}}</strike>

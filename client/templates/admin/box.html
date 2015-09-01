@@ -138,7 +138,9 @@
                   {{#each boxItems}}
                     <tr>
                       <td class="box-item-image">
-                        <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                        {{#if productVariation.productImage}}
+                          <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                        {{/if}}
                       </td>
                       <td>
                         <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}" target="_top">{{productVariation.productName}}</a>
