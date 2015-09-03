@@ -96,18 +96,96 @@
                 </thead>
                 <tbody>
                   {{#each boxItems}}
-                    <tr>
-                      <td>
-                        <a href="#" class="remove-box-item">
-                          <i class="fa fa-remove"></i>
-                        </a>
-                      </td>
-                      <td class="box-item-image">
-                        {{#if productVariation.productImage}}
-                          <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
-                        {{/if}}
-                      </td>
-                      <td>
+                    {{#if productVariation}}
+                      <tr>
+                        <td>
+                          <a href="#" class="remove-box-item">
+                            <i class="fa fa-remove"></i>
+                          </a>
+                        </td>
+                        <td class="box-item-image">
+                          {{#if productVariation.productImage}}
+                            <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                          {{/if}}
+                        </td>
+                        <td>
+                          <p>
+                            <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}" target="_top">{{productVariation.productName}}</a>
+                          </p>
+                          {{#if variationId}}
+                            <select class="form-control box-item-variations">
+                              {{#each variations}}
+                                <option value="{{variationId}}"
+                                    {{selectedIfEquals ../variationId}}>
+                                  {{variationName}}
+                                </option>
+                              {{/each}}
+                            </select>
+                          {{/if}}
+                        </td>
+                        <td class="box-item-quantity">
+                          <div class="input-group spinner">
+                            <input type="text" class="form-control quantity"
+                              value="{{quantity}}">
+                            <div class="input-group-btn-vertical">
+                              <button class="btn btn-default quantity-up"
+                                  type="button">
+                                <i class="fa fa-caret-up"></i>
+                              </button>
+                              <button class="btn btn-default quantity-down"
+                                  type="button">
+                                <i class="fa fa-caret-down"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="box-item-price">
+                          <strike>${{formatPrice totalPrice}}</strike>
+                          ${{formatPrice totalDiscountedPrice}}
+                        </td>
+                      </tr>
+                    {{/if}}
+                  {{/each}}
+                </tbody>
+              </table>
+
+              <div class="visible-xs-block">
+                {{#each boxItems}}
+                  {{#if productVariation}}
+                    <div class="box-item">
+                      <div class="row">
+                        <div class="col-xs-1">
+                          <a href="#" class="remove-box-item">
+                            <i class="fa fa-remove"></i>
+                          </a>
+                        </div>
+                        <div class="col-xs-5 text-center">
+                          {{#if productVariation.productImage}}
+                            <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                          {{/if}}
+                        </div>
+                        <div class="col-xs-2">
+                          <strike>${{formatPrice totalPrice}}</strike>
+                          ${{formatPrice totalDiscountedPrice}}
+                        </div>
+                        <div class="col-xs-3">
+                          <div class="input-group spinner">
+                            <input type="text" class="form-control quantity"
+                              value="{{quantity}}">
+                            <div class="input-group-btn-vertical">
+                              <button class="btn btn-default quantity-up"
+                                  type="button">
+                                <i class="fa fa-caret-up"></i>
+                              </button>
+                              <button class="btn btn-default quantity-down"
+                                  type="button">
+                                <i class="fa fa-caret-down"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
                         <p>
                           <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}" target="_top">{{productVariation.productName}}</a>
                         </p>
@@ -121,83 +199,9 @@
                             {{/each}}
                           </select>
                         {{/if}}
-                      </td>
-                      <td class="box-item-quantity">
-                        <div class="input-group spinner">
-                          <input type="text" class="form-control quantity"
-                            value="{{quantity}}">
-                          <div class="input-group-btn-vertical">
-                            <button class="btn btn-default quantity-up"
-                                type="button">
-                              <i class="fa fa-caret-up"></i>
-                            </button>
-                            <button class="btn btn-default quantity-down"
-                                type="button">
-                              <i class="fa fa-caret-down"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="box-item-price">
-                        <strike>${{formatPrice totalPrice}}</strike>
-                        ${{formatPrice totalDiscountedPrice}}
-                      </td>
-                    </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-
-              <div class="visible-xs-block">
-                {{#each boxItems}}
-                  <div class="box-item">
-                    <div class="row">
-                      <div class="col-xs-1">
-                        <a href="#" class="remove-box-item">
-                          <i class="fa fa-remove"></i>
-                        </a>
-                      </div>
-                      <div class="col-xs-5 text-center">
-                        {{#if productVariation.productImage}}
-                          <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
-                        {{/if}}
-                      </div>
-                      <div class="col-xs-2">
-                        <strike>${{formatPrice totalPrice}}</strike>
-                        ${{formatPrice totalDiscountedPrice}}
-                      </div>
-                      <div class="col-xs-3">
-                        <div class="input-group spinner">
-                          <input type="text" class="form-control quantity"
-                            value="{{quantity}}">
-                          <div class="input-group-btn-vertical">
-                            <button class="btn btn-default quantity-up"
-                                type="button">
-                              <i class="fa fa-caret-up"></i>
-                            </button>
-                            <button class="btn btn-default quantity-down"
-                                type="button">
-                              <i class="fa fa-caret-down"></i>
-                            </button>
-                          </div>
-                        </div>
                       </div>
                     </div>
-                    <div>
-                      <p>
-                        <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}" target="_top">{{productVariation.productName}}</a>
-                      </p>
-                      {{#if variationId}}
-                        <select class="form-control box-item-variations">
-                          {{#each variations}}
-                            <option value="{{variationId}}"
-                                {{selectedIfEquals ../variationId}}>
-                              {{variationName}}
-                            </option>
-                          {{/each}}
-                        </select>
-                      {{/if}}
-                    </div>
-                  </div>
+                  {{/if}}
                 {{/each}}
               </div>
 

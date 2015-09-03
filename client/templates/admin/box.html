@@ -136,25 +136,27 @@
                 </thead>
                 <tbody>
                   {{#each boxItems}}
-                    <tr>
-                      <td class="box-item-image">
-                        {{#if productVariation.productImage}}
-                          <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
-                        {{/if}}
-                      </td>
-                      <td>
-                        <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}" target="_top">{{productVariation.productName}}</a>
-                        {{#if productVariation.variationName}}
-                          <p>({{productVariation.variationName}})</p>
-                        {{/if}}
-                      </td>
-                      <td class="box-item-quantity">
-                        {{quantity}}
-                      </td>
-                      <td class="box-item-price">
-                        ${{formatPrice totalCurrentPrice}}
-                      </td>
-                    </tr>
+                    {{#if productVariation}}
+                      <tr>
+                        <td class="box-item-image">
+                          {{#if productVariation.productImage}}
+                            <img src="{{setting 'storeUrl'}}{{productVariation.productImage}}">
+                          {{/if}}
+                        </td>
+                        <td>
+                          <a href="{{setting 'storeUrl'}}{{productVariation.productUrl}}" target="_top">{{productVariation.productName}}</a>
+                          {{#if productVariation.variationName}}
+                            <p>({{productVariation.variationName}})</p>
+                          {{/if}}
+                        </td>
+                        <td class="box-item-quantity">
+                          {{quantity}}
+                        </td>
+                        <td class="box-item-price">
+                          ${{formatPrice totalCurrentPrice}}
+                        </td>
+                      </tr>
+                    {{/if}}
                   {{/each}}
                 </tbody>
               </table>
